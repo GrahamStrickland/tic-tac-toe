@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-tac-toe</title>
+
+    <!-- Scripts section -->
+    <script src="main.js" defer></script>
+    <script src="https://kit.fontawesome.com/77dc8c5c20.js" crossorigin="anonymous"></script>
+
+    <!-- Links section-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" href="times-solid.svg">
+</head>
+<body>
+    <div id="page-container">
+        <div id="content-wrap">
+        <!-- Header section -->
+            <header>
+                <div class="heading-container">
+                    <h1>Tic-tac-toe</h1>
+                    <div class="diff-control">
+                        <select id="difficulty" name="difficulty" required>
+                            <option disabled selected hidden>Difficulty</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                          </select>
+                    </div>
+
+                    <h3 class="messageBox">
+                    </h3>
+
+                    <div class="controls-container">
+                        <button class="reset-button">Reset</button>
+                        <p class="game-count">User: <span id="userWin"></span> | 
+                            Computer: <span id="compWin"></span></p>
+                    </div>
+                </div>
+            </header>
+    
+        <!-- Main section -->
+            <main>
+                <div class="board">
+                    <div id="0" class="square square0"></div>
+                    <div id="1" class="square square1"></div>
+                    <div id="2" class="square square2"></div>
+                    <div id="3" class="square square3"></div>
+                    <div id="4" class="square square4"></div>
+                    <div id="5" class="square square5"></div>
+                    <div id="6" class="square square6"></div>
+                    <div id="7" class="square square7"></div>
+                    <div id="8" class="square square8"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
