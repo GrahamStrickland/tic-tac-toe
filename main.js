@@ -1,5 +1,4 @@
 // DOM manipulation variables
-const header = document.querySelector('.heading-container');
 const board = document.querySelector('.board');
 let messageBox = document.querySelector('.messageBox');
 const resetBtn = document.querySelector('.reset-button');
@@ -133,7 +132,7 @@ function selectPlayer(choice) {
 
 // Function for click event
 function activateSquare() {
-  if (this.className.indexOf('selected') == -1) {
+  if (this.className.indexOf('selected') === -1) {
     let pos = currState.indexOf(Number(this.id)); 
     let newChoice;
     this.className += ' selected';
@@ -184,7 +183,7 @@ function compActivate() {
     }
   }
 
-  // Random decision making for difficulty
+  // Random decision-making for difficulty
   const free = calcEmpty(currState);
   let rand, best;
   if (diff === 'easy') {
@@ -293,18 +292,14 @@ function miniMax(curr, mark) {
 
 // Win conditions
 function checkWinConditions(curr, mark) {
-  if ((curr[0] === mark && curr[1] === mark && curr[2] === mark) ||
+  return (curr[0] === mark && curr[1] === mark && curr[2] === mark) ||
       (curr[3] === mark && curr[4] === mark && curr[5] === mark) ||
       (curr[6] === mark && curr[7] === mark && curr[8] === mark) ||
       (curr[0] === mark && curr[3] === mark && curr[6] === mark) ||
       (curr[1] === mark && curr[4] === mark && curr[7] === mark) ||
       (curr[2] === mark && curr[5] === mark && curr[8] === mark) ||
       (curr[0] === mark && curr[4] === mark && curr[8] === mark) ||
-      (curr[2] === mark && curr[4] === mark && curr[6] === mark)) {
-    return true;
-  } else {
-    return false;
-  }
+      (curr[2] === mark && curr[4] === mark && curr[6] === mark);
 }
 
 // End game function
