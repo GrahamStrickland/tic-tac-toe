@@ -5,13 +5,13 @@ const resetBtn = document.querySelector('.reset-button');
 const gameCounter = document.querySelector('.game-count');
 const diffSelect = document.querySelector('#difficulty');
 const numSquares = 9;
-let userCount =  document.querySelector('#userWin');
+let userCount = document.querySelector('#userWin');
 let compCount = document.querySelector('#compWin');
 
 // Game variables
 let userWin = 0, compWin = 0, gameCount = 0;
-let gameStart, diff, xBtn, oBtn, xClone, oClone, userChoice, userMark, 
-computerChoice, compMark, player, currState;
+let gameStart, diff, xBtn, oBtn, xClone, oClone, userChoice, userMark,
+  computerChoice, compMark, player, currState;
 
 // Setup first game
 diffSelect.addEventListener('input', () => {
@@ -29,7 +29,7 @@ function setup() {
   board.style.opacity = '0';
   messageBox.style.opacity = 0;
   messageBox.style.transition = 'opacity 250ms';
-  currState =[];
+  currState = [];
   if (gameCount % 2 === 0) {
     player = 'user';
   } else {
@@ -37,7 +37,7 @@ function setup() {
   }
 
   for (let i = 0; i < numSquares; i++) {
-    document.querySelector(`.square${ i }`).innerHTML = '';
+    document.querySelector(`.square${i}`).innerHTML = '';
   }
 
   setTimeout(() => {
@@ -89,16 +89,16 @@ function initialise() {
     }
 
     selectPlayer(userChoice);
-    }
+  }
 }
 
 // Set board opacity, append squares and reveal
 function revealBoard() {
   board.style.opacity = '1';
   board.style.transition = 'opacity 500ms';
-  
+
   for (let i = 0; i < numSquares; i++) {
-    let square = document.querySelector(`.square${ i }`);
+    let square = document.querySelector(`.square${i}`);
     let squareClass = square.className.toString();
     if (squareClass.includes('selected')) {
       let newClass = squareClass.replace('selected', '');
@@ -133,7 +133,7 @@ function selectPlayer(choice) {
 // Function for click event
 function activateSquare() {
   if (this.className.indexOf('selected') === -1) {
-    let pos = currState.indexOf(Number(this.id)); 
+    let pos = currState.indexOf(Number(this.id));
     let newChoice;
     this.className += ' selected';
 
@@ -146,7 +146,7 @@ function activateSquare() {
       const freeSquares = calcEmpty(currState);
       if (checkWinConditions(currState, userMark)) {
         endGame(player);
-      } else if (freeSquares.length === 0) { 
+      } else if (freeSquares.length === 0) {
         endGame('');
       } else {
         player = 'computer';
@@ -155,13 +155,13 @@ function activateSquare() {
       // Determine computer's move and check winning conditions
     } else {
       newChoice = computerChoice.cloneNode(true);
-      
+
       currState.splice(pos, 1, compMark);
 
       const freeSquares = calcEmpty(currState);
       if (checkWinConditions(currState, compMark)) {
         endGame(player);
-      } else if (freeSquares.length === 0) { 
+      } else if (freeSquares.length === 0) {
         endGame('');
       } else {
         player = 'user';
@@ -179,7 +179,7 @@ function activateSquare() {
 function compActivate() {
   for (let i = 0; i < numSquares; i++) {
     if (typeof currState[i] === 'number') {
-      removeSelect(document.querySelector(`.square${ i }`));
+      removeSelect(document.querySelector(`.square${i}`));
     }
   }
 
@@ -197,17 +197,17 @@ function compActivate() {
   if (rand !== 1) {
     best = miniMax(currState, compMark);
   } else {
-    best = {index: free[randomNum(0, free.length - 1)], score: 1};
+    best = { index: free[randomNum(0, free.length - 1)], score: 1 };
   }
 
   if (currState.includes(best.index)) {
     setTimeout(() => {
       for (let i = 0; i < numSquares; i++) {
         if (typeof currState[i] === 'number') {
-          document.querySelector(`.square${ i }`).addEventListener('click', activateSquare);
+          document.querySelector(`.square${i}`).addEventListener('click', activateSquare);
         }
       }
-      let compSquare = document.querySelector(`.square${ best.index }`);
+      let compSquare = document.querySelector(`.square${best.index}`);
       compSquare.click();
     }, 500);
   }
@@ -234,11 +234,11 @@ function miniMax(curr, mark) {
 
   // Determine win, lose or draw
   if (checkWinConditions(curr, userMark)) {
-    return {score: -1};
+    return { score: -1 };
   } else if (checkWinConditions(curr, compMark)) {
-    return {score: 1};
+    return { score: 1 };
   } else if (freeSquares.length === 0) {
-    return {score: 0};
+    return { score: 0 };
   }
 
   // Create aray to test possible outcomes
@@ -293,13 +293,13 @@ function miniMax(curr, mark) {
 // Win conditions
 function checkWinConditions(curr, mark) {
   return (curr[0] === mark && curr[1] === mark && curr[2] === mark) ||
-      (curr[3] === mark && curr[4] === mark && curr[5] === mark) ||
-      (curr[6] === mark && curr[7] === mark && curr[8] === mark) ||
-      (curr[0] === mark && curr[3] === mark && curr[6] === mark) ||
-      (curr[1] === mark && curr[4] === mark && curr[7] === mark) ||
-      (curr[2] === mark && curr[5] === mark && curr[8] === mark) ||
-      (curr[0] === mark && curr[4] === mark && curr[8] === mark) ||
-      (curr[2] === mark && curr[4] === mark && curr[6] === mark);
+    (curr[3] === mark && curr[4] === mark && curr[5] === mark) ||
+    (curr[6] === mark && curr[7] === mark && curr[8] === mark) ||
+    (curr[0] === mark && curr[3] === mark && curr[6] === mark) ||
+    (curr[1] === mark && curr[4] === mark && curr[7] === mark) ||
+    (curr[2] === mark && curr[5] === mark && curr[8] === mark) ||
+    (curr[0] === mark && curr[4] === mark && curr[8] === mark) ||
+    (curr[2] === mark && curr[4] === mark && curr[6] === mark);
 }
 
 // End game function
@@ -328,7 +328,7 @@ function endGame(winner) {
 
     // Remove click listener for each square
     for (let i = 0; i < numSquares; i++) {
-      removeSelect(document.querySelector(`.square${ i }`));
+      removeSelect(document.querySelector(`.square${i}`));
     }
   }
 
